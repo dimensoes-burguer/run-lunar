@@ -308,6 +308,8 @@ let farObjects = [];
 let sparkles = [];
 let shootingStars = [];
 let decorAsteroid = null;
+let nextObstacleFrame = 0;
+let nextCollectibleFrame = 0;
 
 const player = {
   x: 72,
@@ -474,6 +476,8 @@ function reset(){
   frame = 0;
   score = 0;
   speed = 6;
+  nextObstacleFrame = Math.floor(rand(45, 100));
+  nextCollectibleFrame = Math.floor(rand(160, 340));
   obstacles = [];
   particles = [];
   collectibles = [];
@@ -542,13 +546,13 @@ function spawnObstacle(){
     {kind:'beast', sprite:'beast', w:82, h:70, yOff:8},
     {kind:'eye', sprite:'eye', w:74, h:56, yOff:20}
   ]);
-  obstacles.push({x: canvas.width + 30, y: groundY - type.h + type.yOff, ...type, glow: rand(.8,1.2)});
+  obstacles.push({x: canvas.width + rand(25, 85), y: groundY - type.h + type.yOff, ...type, glow: rand(.8,1.2)});
 }
 
 function spawnCollectible(){
   collectibles.push({
-    x: canvas.width + 20,
-    y: rand(360, 540),
+    x: canvas.width + rand(35, 120),
+    y: rand(340, 540),
     w: 64,
     h: 64,
     sprite:'burger',
@@ -794,7 +798,10 @@ function unlockCoupon(){
 function update(){
   frame++;
   score += .36 + speed*0.018;
-  speed = Math.min(13.5, speed + 0.0024);
+  // Velocidade progressiva: quanto mais tempo o jogador aguenta, mais rápido fica.
+  // A cada faixa de pontos, a aceleração aumenta um pouco.
+  const difficultyBoost = Math.floor(score / 250) * 0.00075;
+  speed = Math.min(19.5, speed + 0.0032 + difficultyBoost);
 
   maybeShootingStar();
 
@@ -817,8 +824,16 @@ function update(){
     }
   });
 
-  if(frame % Math.max(40, Math.floor(96 - speed*4.2)) === 0) spawnObstacle();
-  if(frame % 300 === 0) spawnCollectible();
+  if(frame >= nextObstacleFrame){
+    spawnObstacle();
+    const minGap = Math.max(38, 92 - speed * 4.3);
+    const maxGap = Math.max(68, 155 - speed * 3.0);
+    nextObstacleFrame = frame + Math.floor(rand(minGap, maxGap));
+  }
+  if(frame >= nextCollectibleFrame){
+    spawnCollectible();
+    nextCollectibleFrame = frame + Math.floor(rand(210, 450));
+  }
 
   obstacles.forEach(o => o.x -= speed);
   obstacles = obstacles.filter(o => o.x + o.w > -40);
