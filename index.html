@@ -2,17 +2,16 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Dimensões Run Lunar Plus - Dimensões Burguer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>Dimensões Run Lunar - Fundo Cósmico</title>
 <style>
   :root{
     --green:#31ff73;
     --green2:#a3ff44;
     --purple:#a855f7;
     --purple2:#6d28d9;
-    --blue:#60a5fa;
     --dark:#030712;
-    --card:rgba(10,18,35,.84);
+    --card:rgba(10,18,35,.82);
     --line:rgba(132,255,58,.25);
     --text:#f8fafc;
     --muted:#cbd5e1;
@@ -34,19 +33,18 @@
     font-family:Segoe UI, Arial, sans-serif;
     color:var(--text);
     padding:18px;
-    overflow-x:hidden;
   }
-  .wrap{width:min(1080px,100%)}
+  .wrap{width:min(760px,100%)}
   .top{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-bottom:12px;flex-wrap:wrap;}
   .brand{display:flex;align-items:center;gap:14px;}
-  .logo{
-    width:62px;height:62px;border-radius:18px;display:grid;place-items:center;
-    background:radial-gradient(circle at 40% 40%, #8dff4f 0%, #22c55e 28%, #0b5e35 48%, #140625 76%);
-    box-shadow:0 0 26px rgba(49,255,115,.45), inset 0 0 16px rgba(255,255,255,.15);
-    font-size:30px;
-    animation:pulseLogo 1.7s ease-in-out infinite;
+  .logoWrap{
+    width:72px;height:72px;border-radius:18px;display:grid;place-items:center;flex:0 0 auto;
+    background:rgba(7,12,24,.82);
+    border:1px solid rgba(132,255,58,.22);
+    box-shadow:0 0 26px rgba(49,255,115,.18), inset 0 0 16px rgba(255,255,255,.05);
+    overflow:hidden;
   }
-  @keyframes pulseLogo{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+  .logoImg{width:100%;height:100%;object-fit:cover;display:block;}
   h1{margin:0;font-size:28px;letter-spacing:.4px;}
   .subtitle{margin-top:4px;color:#cbd5e1;font-size:14px;}
   .scoreBox{display:flex;gap:10px;flex-wrap:wrap;}
@@ -67,11 +65,11 @@
     box-shadow:0 24px 65px rgba(0,0,0,.55), inset 0 0 45px rgba(49,255,115,.04);
   }
   canvas{display:block;width:100%;height:auto;background:#02050d}
-  .overlay{position:absolute;inset:0;display:grid;place-items:center;padding:20px;background:linear-gradient(180deg,rgba(2,6,23,.50),rgba(2,6,23,.24));}
+  .overlay{position:absolute;inset:0;display:grid;place-items:center;padding:20px;background:linear-gradient(180deg,rgba(2,6,23,.45),rgba(2,6,23,.2));}
   .panel{
-    width:min(620px,94%);
-    background:rgba(3,7,18,.88);
-    border:1px solid rgba(132,255,58,.30);
+    width:min(560px,94%);
+    background:rgba(3,7,18,.84);
+    border:1px solid rgba(132,255,58,.26);
     border-radius:22px;
     padding:24px;
     box-shadow:0 0 40px rgba(49,255,115,.14), 0 20px 40px rgba(0,0,0,.35);
@@ -79,7 +77,6 @@
   }
   .panel h2{margin:0 0 8px;font-size:34px;}
   .panel p{margin:8px 0;color:#dbe4f0;line-height:1.5;}
-  .actions{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:12px;}
   button{
     border:0;
     background:linear-gradient(135deg,#31ff73,#17a34a);
@@ -89,57 +86,98 @@
     font-weight:900;
     cursor:pointer;
     font-size:16px;
+    margin-top:12px;
     box-shadow:0 10px 28px rgba(49,255,115,.28);
   }
-  button.secondary{background:linear-gradient(135deg,#a855f7,#6d28d9);box-shadow:0 10px 28px rgba(168,85,247,.28);}
-  button.ghost{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);box-shadow:none;}
   button:hover{filter:brightness(1.08)}
+  .couponWin{display:none;margin-top:12px;padding:12px;border-radius:14px;background:rgba(250,204,21,.1);border:1px solid rgba(250,204,21,.42);color:#fef3c7;font-weight:800;}
+  .help{margin-top:12px;color:#cbd5e1;font-size:13px;opacity:.9;text-align:center;}
+
+  .nameRow{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;margin:12px 0 6px}
   input{
     width:min(360px,100%);
-    background:rgba(15,23,42,.9);
+    border:1px solid rgba(132,255,58,.38);
+    background:rgba(15,23,42,.86);
     color:white;
-    border:1px solid rgba(132,255,58,.28);
-    border-radius:14px;
     padding:14px 15px;
+    border-radius:14px;
     font-size:15px;
     outline:none;
     text-align:center;
     font-weight:800;
-    box-shadow: inset 0 0 18px rgba(49,255,115,.04);
   }
-  input:focus{border-color:rgba(132,255,58,.68)}
-  .couponWin{display:none;margin-top:12px;padding:12px;border-radius:14px;background:rgba(250,204,21,.1);border:1px solid rgba(250,204,21,.42);color:#fef3c7;font-weight:800;}
-  .help{margin-top:12px;color:#cbd5e1;font-size:13px;opacity:.9;text-align:center;}
-  .loadingBar{height:12px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;margin:16px auto 8px;max-width:420px;border:1px solid rgba(255,255,255,.08)}
+  .btnRow{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:12px}
+  .secondary{background:linear-gradient(135deg,#a855f7,#6d28d9)}
+  .ranking{margin-top:14px;display:grid;gap:8px;text-align:left}
+  .rankingTitle{font-weight:900;color:#dcfce7;text-align:center;margin-top:12px}
+  .rankRow{display:flex;justify-content:space-between;gap:10px;padding:9px 12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:12px;font-weight:800}
+  .rankRow span:first-child{color:#fef3c7;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .rankEmpty{text-align:center;color:#cbd5e1;font-size:13px;margin-top:8px}
+  .recordCard{padding:15px;border-radius:16px;background:linear-gradient(135deg,rgba(49,255,115,.16),rgba(168,85,247,.10));border:1px solid rgba(132,255,58,.26);text-align:center;box-shadow:inset 0 0 22px rgba(49,255,115,.06)}
+  .recordLabel{font-size:12px;letter-spacing:.8px;text-transform:uppercase;color:#bbf7d0;font-weight:900}
+  .recordValue{font-size:42px;line-height:1;font-weight:1000;color:#fef9c3;text-shadow:0 0 18px rgba(250,204,21,.32);margin-top:5px}
+  .lastCard{padding:12px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);text-align:center;color:#dbe4f0;font-weight:800}
+  .lastCard b{color:#fff}
+  .loadingBar{height:12px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;margin:14px auto 8px;max-width:420px;border:1px solid rgba(255,255,255,.08)}
   .loadingFill{height:100%;width:0;background:linear-gradient(90deg,#31ff73,#a855f7,#60a5fa);border-radius:999px;transition:width .18s ease;box-shadow:0 0 18px rgba(49,255,115,.45)}
-  .ranking{
-    margin-top:14px;
-    display:grid;
-    gap:8px;
-    text-align:left;
-  }
-  .rankingTitle{font-weight:900;color:#dcfce7;text-align:center;margin-top:10px;}
-  .rankRow{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-    padding:9px 12px;
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.07);
-    border-radius:12px;
-    font-weight:800;
-  }
-  .rankRow span:first-child{color:#fef3c7;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-  .rankEmpty{text-align:center;color:#cbd5e1;font-size:13px;margin-top:8px;}
-  .tagline{display:inline-block;margin-top:8px;padding:7px 10px;border-radius:999px;background:rgba(49,255,115,.10);border:1px solid rgba(49,255,115,.23);font-size:13px;color:#dcfce7;font-weight:800;}
-  .soundDot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#31ff73;box-shadow:0 0 12px #31ff73;margin-right:7px;vertical-align:middle;}
+  .miniTag{display:inline-block;margin-top:8px;padding:7px 10px;border-radius:999px;background:rgba(49,255,115,.10);border:1px solid rgba(49,255,115,.23);font-size:13px;color:#dcfce7;font-weight:800}
+
   @media(max-width:640px){
-    body{padding:10px;}
-    h1{font-size:23px;}
+    body{
+      padding:calc(10px + env(safe-area-inset-top)) 10px calc(10px + env(safe-area-inset-bottom));
+      align-items:flex-start;
+    }
+    .wrap{width:100%;}
+    .top{gap:10px;margin-bottom:10px;}
+    .brand{gap:10px;align-items:flex-start;}
+    .logoWrap{width:58px;height:58px;border-radius:16px;flex:0 0 auto;}
+    h1{font-size:22px;line-height:1.1;}
+    .subtitle{font-size:13px;line-height:1.35;}
     .scoreBox{gap:8px;}
-    .pill{padding:8px 12px;font-size:13px;}
-    .panel h2{font-size:28px;}
-    .panel{padding:18px;}
+    .pill{padding:7px 10px;font-size:12px;}
+    .gameCard{border-radius:18px;}
+    canvas{height:auto;max-height:calc(100svh - 140px);object-fit:contain;}
+    .overlay{
+      position:fixed;
+      inset:0;
+      z-index:999;
+      align-items:flex-start;
+      overflow-y:auto;
+      -webkit-overflow-scrolling:touch;
+      padding:calc(12px + env(safe-area-inset-top)) 12px calc(18px + env(safe-area-inset-bottom));
+      background:linear-gradient(180deg,rgba(2,6,23,.82),rgba(2,6,23,.58));
+    }
+    .panel{
+      width:min(100%, 520px);
+      max-height:none;
+      border-radius:18px;
+      padding:18px 14px 20px;
+      margin:auto;
+    }
+    .panel h2{font-size:26px;line-height:1.15;}
+    .panel p{font-size:14px;line-height:1.45;}
+    .nameRow{margin:10px 0 8px;}
+    input{
+      width:100%;
+      min-height:52px;
+      font-size:16px;
+      padding:14px 16px;
+      border-radius:14px;
+    }
+    .btnRow{flex-direction:column;gap:10px;}
+    .btnRow button,
+    button{
+      width:100%;
+      min-height:50px;
+      font-size:15px;
+      padding:13px 16px;
+      margin-top:0;
+    }
+    .miniTag{font-size:12px;line-height:1.35;padding:8px 10px;}
+    .rankingTitle{font-size:14px;}
+    .rankRow{padding:10px 12px;font-size:14px;}
+    .couponWin{font-size:14px;line-height:1.4;}
+    .help{font-size:12px;line-height:1.4;}
   }
 </style>
 </head>
@@ -147,10 +185,10 @@
 <div class="wrap">
   <div class="top">
     <div class="brand">
-      <div class="logo">🌀</div>
+      <div class="logoWrap"><img class="logoImg" src="assets/logo_oficial_dimensoes_burguer.webp" alt="Dimensões Burguer"></div>
       <div>
         <h1>DIMENSÕES RUN LUNAR</h1>
-        <div class="subtitle">Corra na lua, atravesse portais e escape dos inimigos dimensionais.</div>
+        <div class="subtitle">Jogo vertical para celular: corra na lua, pule inimigos e bata seu recorde.</div>
       </div>
     </div>
     <div class="scoreBox">
@@ -162,49 +200,43 @@
   </div>
 
   <div class="gameCard">
-    <canvas id="game" width="960" height="440"></canvas>
-
-    <div class="overlay" id="loadingOverlay">
+    <canvas id="game" width="720" height="1040"></canvas>
+    <div class="overlay" id="overlay">
       <div class="panel">
-        <h2>🌀 Abrindo portal...</h2>
-        <p>Carregando a corrida lunar da Dimensões Burguer.</p>
-        <div class="loadingBar"><div class="loadingFill" id="loadingFill"></div></div>
-        <p id="loadingText">Preparando cenário dimensional...</p>
-      </div>
-    </div>
+        <h2 id="panelTitle">🌀 Abrindo portal...</h2>
+        <p id="panelText">Carregando corrida lunar da Dimensões Burguer...</p>
+        <div class="loadingBar" id="loadingBar"><div class="loadingFill" id="loadingFill"></div></div>
 
-    <div class="overlay" id="startOverlay" style="display:none">
-      <div class="panel">
-        <h2>🌙 Corrida na Lua!</h2>
-        <p>Digite seu nome para entrar no ranking local e correr pelo portal dimensional. A versão para download abaixo já vem com a imagem embutida.</p>
-        <input id="playerNameInput" maxlength="16" placeholder="Seu nome ou apelido" />
-        <p><b>Como jogar:</b> aperte <b>Espaço</b>, <b>↑</b>, clique ou toque na tela para pular.</p>
-        <p>Faça <b>500 pontos</b> para liberar um cupom teste.</p>
-        <div class="actions">
-          <button onclick="startGame()">Começar jogo</button>
-          <button class="secondary" onclick="toggleSound()"><span class="soundDot" id="soundDot"></span><span id="soundLabel">Som ligado</span></button>
+        <div id="startContent" style="display:none">
+          <p>Digite seu nome para salvar o maior recorde e a última jogada neste celular.</p>
+          <div class="nameRow">
+            <input id="playerNameInput" maxlength="16" placeholder="Seu nome ou apelido" />
+          </div>
+          <p><b>Como jogar:</b> aperte <b>Espaço</b>, <b>↑</b>, clique ou toque na tela para pular.</p>
+          <p>Faça <b>500 pontos</b> para liberar um cupom teste.</p>
+          <div class="btnRow">
+            <button onclick="startGame()">Começar jogo</button>
+            <button class="secondary" onclick="toggleSound()" id="soundBtn">Som: ligado</button>
+          </div>
+          <div class="miniTag">DIMENSÕES BURGUER • ENTRE PARA A DIMENSÃO DO SABOR</div>
+          <div class="rankingTitle">🏆 Recorde e última jogada</div>
+          <div class="ranking" id="rankingBox"></div>
         </div>
-        <div class="tagline">DIMENSÕES BURGUER • ENTRE PARA A DIMENSÃO DO SABOR</div>
-        <div class="rankingTitle">🏆 Ranking local</div>
-        <div class="ranking" id="rankingStart"></div>
+
+        <div id="gameOverContent" style="display:none">
+          <div class="btnRow">
+            <button onclick="startGame()">Jogar novamente</button>
+            <button class="secondary" onclick="showStartScreen()">Voltar ao início</button>
+          </div>
+          <div class="rankingTitle">🏆 Recorde e última jogada</div>
+          <div class="ranking" id="rankingGameOver"></div>
+        </div>
+
         <div class="couponWin" id="couponWin">🎁 Cupom teste desbloqueado: <b>PORTAL5</b></div>
       </div>
     </div>
-
-    <div class="overlay" id="gameOverOverlay" style="display:none">
-      <div class="panel">
-        <h2 id="gameOverTitle">💥 Você foi pego!</h2>
-        <p id="gameOverText">Sua pontuação aparece aqui.</p>
-        <div class="actions">
-          <button onclick="startGame()">Jogar novamente</button>
-          <button class="ghost" onclick="showStart()">Voltar ao início</button>
-        </div>
-        <div class="rankingTitle">🏆 Ranking local</div>
-        <div class="ranking" id="rankingGameOver"></div>
-      </div>
-    </div>
   </div>
-  <div class="help">Ranking local salva no navegador do cliente. Para ranking geral de todos os clientes, depois conectamos no Firebase.</div>
+  <div class="help">Versão leve: salva somente o maior recorde e a última jogada neste aparelho.</div>
 </div>
 
 <script>
@@ -213,32 +245,32 @@ const ctx = canvas.getContext('2d');
 const scoreEl = document.getElementById('score');
 const bestEl = document.getElementById('best');
 const couponsEl = document.getElementById('coupons');
-const playerNameHud = document.getElementById('playerNameHud');
-const loadingOverlay = document.getElementById('loadingOverlay');
-const startOverlay = document.getElementById('startOverlay');
-const gameOverOverlay = document.getElementById('gameOverOverlay');
-const loadingFill = document.getElementById('loadingFill');
-const loadingText = document.getElementById('loadingText');
+const overlay = document.getElementById('overlay');
 const couponWin = document.getElementById('couponWin');
-const rankingStart = document.getElementById('rankingStart');
-const rankingGameOver = document.getElementById('rankingGameOver');
+const panelTitle = document.getElementById('panelTitle');
+const panelText = document.getElementById('panelText');
+const loadingBar = document.getElementById('loadingBar');
+const loadingFill = document.getElementById('loadingFill');
+const startContent = document.getElementById('startContent');
+const gameOverContent = document.getElementById('gameOverContent');
 const playerNameInput = document.getElementById('playerNameInput');
-const soundLabel = document.getElementById('soundLabel');
-const soundDot = document.getElementById('soundDot');
+const playerNameHud = document.getElementById('playerNameHud');
+const soundBtn = document.getElementById('soundBtn');
+const rankingBox = document.getElementById('rankingBox');
+const rankingGameOver = document.getElementById('rankingGameOver');
 
-const bestKey = 'dimensoesRunMoonPlusBest';
-const couponsKey = 'dimensoesRunMoonPlusCoupons';
-const couponFlagKey = 'dimensoesRunMoonPlusGotPortal5';
-const rankingKey = 'dimensoesRunMoonPlusRanking';
-const playerKey = 'dimensoesRunMoonPlusPlayer';
-const soundKey = 'dimensoesRunMoonPlusSound';
+const bestKey = 'dimensoesRunMoonBest';
+const lastKey = 'dimensoesRunMoonLastGame';
+const couponsKey = 'dimensoesRunMoonCoupons';
+const couponFlagKey = 'dimensoesRunMoonGotPortal5';
+const legacyRankingKeys = ['dimensoesRunMoonPlusRanking','dimensoesRunMoonRanking'];
+legacyRankingKeys.forEach(k => { try{ localStorage.removeItem(k); }catch(e){} });
 
 let best = Number(localStorage.getItem(bestKey) || 0);
 let coupons = Number(localStorage.getItem(couponsKey) || 0);
-let playerName = localStorage.getItem(playerKey) || '';
-let soundOn = localStorage.getItem(soundKey) !== 'off';
+let playerName = localStorage.getItem('dimensoesRunMoonPlayerName') || '';
+let soundOn = localStorage.getItem('dimensoesRunMoonSound') !== 'off';
 let audioCtx = null;
-
 bestEl.textContent = best;
 couponsEl.textContent = coupons;
 playerNameHud.textContent = playerName || '---';
@@ -246,8 +278,7 @@ playerNameInput.value = playerName;
 updateSoundButton();
 
 const atlas = new Image();
-atlas.src = 'data:image/png;base64,__BASE64_EMBUTIDO_NO_ARQUIVO_FINAL__';
-// Prévia do código. O arquivo baixável vem com a arte real embutida.
+atlas.src = 'assets/personagens.png';
 
 const sprites = {
   player:  {sx: 20,   sy: 35,  sw: 460, sh: 470},
@@ -264,77 +295,123 @@ let gameOver = false;
 let frame = 0;
 let score = 0;
 let speed = 6;
-let groundY = 356;
+let groundY = 650;
 let obstacles = [];
 let particles = [];
 let collectibles = [];
 let stars = [];
 let farObjects = [];
+let sparkles = [];
 let shootingStars = [];
-let moonDust = [];
-let comboGlow = 0;
-let shake = 0;
 
 const player = {
-  x: 95,
+  x: 72,
   y: 0,
-  w: 84,
-  h: 84,
+  w: 92,
+  h: 92,
   vy: 0,
-  gravity: 0.78,
-  jump: -15.2,
+  gravity: 0.82,
+  jump: -16.8,
   grounded: true
 };
 player.y = groundY - player.h;
 
 function rand(min,max){ return Math.random()*(max-min)+min; }
 function choose(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
-function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
 
-function getRanking(){
-  try { return JSON.parse(localStorage.getItem(rankingKey) || '[]'); }
-  catch(e){ return []; }
-}
-function saveRanking(name, points){
-  const clean = (name || 'Cliente').trim().slice(0,16) || 'Cliente';
-  const list = getRanking();
-  list.push({name: clean, score: Math.floor(points), date: new Date().toLocaleDateString('pt-BR')});
-  list.sort((a,b)=>b.score-a.score);
-  localStorage.setItem(rankingKey, JSON.stringify(list.slice(0,5)));
-}
-function renderRanking(target){
-  const list = getRanking();
-  if(!list.length){
-    target.innerHTML = '<div class="rankEmpty">Ainda não tem ranking. Seja o primeiro a correr!</div>';
-    return;
+function makeStars(){
+  stars = [];
+  for(let i=0;i<120;i++){
+    stars.push({x:rand(0,canvas.width), y:rand(0,groundY-90), r:rand(.5,2.2), a:rand(.25,.95), s:rand(.05,.6)});
   }
-  target.innerHTML = list.map((r,i)=>`
-    <div class="rankRow">
-      <span>${i+1}º ${escapeHtml(r.name)}</span>
-      <span>${r.score} pts</span>
-    </div>
-  `).join('');
 }
+
+
+function newFarObject(x = rand(0,canvas.width + 220)){
+  const preset = choose([
+    {assetKey:'planet1', size:[78,150], y:[90,250], alpha:[0.72,0.96], speed:[0.08,0.18], rot:[-0.00035,0.00035]},
+    {assetKey:'planet2', size:[90,165], y:[80,255], alpha:[0.76,0.98], speed:[0.08,0.17], rot:[-0.0003,0.0003]},
+    {assetKey:'galaxy1', size:[110,220], y:[70,230], alpha:[0.52,0.86], speed:[0.06,0.14], rot:[-0.00045,0.00045]},
+    {assetKey:'nebula1', size:[170,310], y:[75,235], alpha:[0.26,0.48], speed:[0.04,0.11], rot:[-0.00018,0.00018]},
+    {assetKey:'nebula2', size:[170,300], y:[70,240], alpha:[0.24,0.44], speed:[0.04,0.11], rot:[-0.00018,0.00018]},
+    {assetKey:'stars1', size:[120,220], y:[50,240], alpha:[0.22,0.45], speed:[0.05,0.12], rot:[-0.0002,0.0002]},
+    {assetKey:'stars2', size:[130,240], y:[40,250], alpha:[0.18,0.34], speed:[0.05,0.12], rot:[-0.0002,0.0002]}
+  ]);
+  const size = rand(preset.size[0], preset.size[1]);
+  const ratio = preset.assetKey.startsWith('stars') ? rand(0.95,1.2) : rand(0.88,1.12);
+  return {
+    assetKey: preset.assetKey,
+    x,
+    y: rand(preset.y[0], preset.y[1]),
+    w: size * ratio,
+    h: size,
+    alpha: rand(preset.alpha[0], preset.alpha[1]),
+    speed: rand(preset.speed[0], preset.speed[1]),
+    rotate: rand(-0.3,0.3),
+    rotSpeed: rand(preset.rot[0], preset.rot[1])
+  };
+}
+
+function makeFarObjects(){
+  farObjects = [];
+  for(let i=0;i<11;i++) farObjects.push(newFarObject(rand(0, canvas.width + i*135)));
+}
+
 function escapeHtml(str){
   return String(str).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 }
 
-function updateSoundButton(){
-  soundLabel.textContent = soundOn ? 'Som ligado' : 'Som desligado';
-  soundDot.style.background = soundOn ? '#31ff73' : '#ef4444';
-  soundDot.style.boxShadow = soundOn ? '0 0 12px #31ff73' : '0 0 12px #ef4444';
+function getLastGame(){
+  try { return JSON.parse(localStorage.getItem(lastKey) || "null"); }
+  catch(e){ return null; }
 }
+
+function saveRanking(name, points){
+  const clean = (name || "Cliente").trim().slice(0,16) || "Cliente";
+  localStorage.setItem(lastKey, JSON.stringify({
+    name: clean,
+    score: Math.floor(points),
+    date: new Date().toLocaleDateString("pt-BR"),
+    time: new Date().toLocaleTimeString("pt-BR", {hour:"2-digit", minute:"2-digit"})
+  }));
+}
+
+function renderRanking(target){
+  const last = getLastGame();
+  const bestNow = Number(localStorage.getItem(bestKey) || 0);
+  const lastHtml = last
+    ? `<div class="lastCard">Última jogada: <b>${escapeHtml(last.name)}</b> fez <b>${last.score}</b> pontos<br><small>${last.date} às ${last.time}</small></div>`
+    : '<div class="lastCard">Última jogada: nenhuma ainda</div>';
+  target.innerHTML = `
+    <div class="recordCard">
+      <div class="recordLabel">Maior recorde</div>
+      <div class="recordValue">${bestNow}</div>
+      <div class="recordLabel">pontos</div>
+    </div>
+    ${lastHtml}
+  `;
+}
+
+function updateSoundButton(){
+  if(soundBtn) soundBtn.textContent = soundOn ? "Som: ligado" : "Som: desligado";
+}
+
 function toggleSound(){
   soundOn = !soundOn;
-  localStorage.setItem(soundKey, soundOn ? 'on' : 'off');
+  localStorage.setItem("dimensoesRunMoonSound", soundOn ? "on" : "off");
   updateSoundButton();
-  if(soundOn) playSound('collect');
+  if(soundOn) playSound("collect");
 }
+
 function ensureAudio(){
-  if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  if(audioCtx.state === 'suspended') audioCtx.resume();
+  if(!soundOn) return;
+  try{
+    if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if(audioCtx.state === "suspended") audioCtx.resume();
+  }catch(e){}
 }
-function playTone(freq, duration, type='sine', volume=.05){
+
+function playTone(freq, duration, type="sine", volume=.05){
   if(!soundOn) return;
   try{
     ensureAudio();
@@ -350,46 +427,55 @@ function playTone(freq, duration, type='sine', volume=.05){
     osc.stop(audioCtx.currentTime + duration);
   }catch(e){}
 }
+
 function playSound(type){
-  if(type === 'jump'){
-    playTone(420,.08,'triangle',.045);
-    setTimeout(()=>playTone(620,.07,'triangle',.035),55);
+  if(type === "jump"){
+    playTone(420,.08,"triangle",.045);
+    setTimeout(()=>playTone(620,.07,"triangle",.035),55);
   }
-  if(type === 'collect'){
-    playTone(780,.06,'sine',.05);
-    setTimeout(()=>playTone(1050,.08,'sine',.05),55);
+  if(type === "collect"){
+    playTone(780,.06,"sine",.05);
+    setTimeout(()=>playTone(1050,.08,"sine",.05),55);
   }
-  if(type === 'hit'){
-    playTone(120,.16,'sawtooth',.045);
-    setTimeout(()=>playTone(80,.18,'sawtooth',.035),80);
+  if(type === "hit"){
+    playTone(120,.16,"sawtooth",.045);
+    setTimeout(()=>playTone(80,.18,"sawtooth",.035),80);
   }
-  if(type === 'coupon'){
-    [520,690,880,1180].forEach((n,i)=>setTimeout(()=>playTone(n,.08,'square',.035),i*70));
+  if(type === "coupon"){
+    [520,690,880,1180].forEach((n,i)=>setTimeout(()=>playTone(n,.08,"square",.035),i*70));
   }
 }
 
-function makeStars(){
-  stars = [];
-  for(let i=0;i<145;i++){
-    stars.push({x:rand(0,canvas.width), y:rand(0,groundY-90), r:rand(.5,2.2), a:rand(.25,.95), s:rand(.05,.7)});
-  }
+function showStartScreen(){
+  running = false;
+  panelTitle.textContent = "🌙 Corrida Vertical!";
+  panelText.innerHTML = "Feito para jogar com o celular em pé: corra na lua, desvie dos inimigos e tente bater seu recorde.";
+  loadingBar.style.display = "none";
+  startContent.style.display = "block";
+  gameOverContent.style.display = "none";
+  overlay.style.display = "grid";
+  renderRanking(rankingBox);
 }
-function newFarObject(x = rand(0,canvas.width + 220)){
-  const kind = choose(['planet','nebula','galaxy','ringPlanet','portalGhost']);
-  const base = {kind, x, y: rand(30, 230), speed: rand(.08,.35), size: rand(45,140)};
-  if(kind === 'planet') return {...base, colorA: choose(['#8b5cf6','#60a5fa','#22c55e','#f472b6','#f59e0b']), colorB: choose(['#312e81','#0f172a','#064e3b','#4c1d95','#7c2d12'])};
-  if(kind === 'ringPlanet') return {...base, size: rand(60,150), colorA: choose(['#f59e0b','#60a5fa','#a855f7','#22c55e']), colorB: choose(['#111827','#312e81','#14532d','#3b0764'])};
-  if(kind === 'galaxy') return {...base, size: rand(70,150), hue: rand(0,360)};
-  if(kind === 'portalGhost') return {...base, size: rand(80,150), hue: rand(90,155), alpha: rand(.18,.34)};
-  return {...base, size: rand(120,240), hue: rand(0,360), alpha: rand(.09,.22)};
+
+function setPlayerName(){
+  playerName = (playerNameInput.value || "Cliente").trim().slice(0,16) || "Cliente";
+  localStorage.setItem("dimensoesRunMoonPlayerName", playerName);
+  playerNameHud.textContent = playerName;
 }
-function makeFarObjects(){
-  farObjects = [];
-  for(let i=0;i<10;i++) farObjects.push(newFarObject(rand(0, canvas.width + i*120)));
-}
-function makeDust(){
-  moonDust = [];
-  for(let i=0;i<26;i++) moonDust.push({x:rand(0,canvas.width), y:rand(groundY+8,canvas.height-10), s:rand(1,4), a:rand(.08,.24)});
+
+function fakeLoading(){
+  let progress = 0;
+  const steps = ["Preparando cenário dimensional...", "Carregando personagens...", "Abrindo portal lunar...", "Preparando recorde local...", "Tudo pronto!"];
+  const t = setInterval(()=>{
+    progress += rand(8,18);
+    if(progress >= 100) progress = 100;
+    loadingFill.style.width = progress + "%";
+    panelText.textContent = steps[Math.min(steps.length-1, Math.floor(progress/25))];
+    if(progress >= 100){
+      clearInterval(t);
+      setTimeout(showStartScreen, 350);
+    }
+  }, 170);
 }
 
 function reset(){
@@ -401,46 +487,36 @@ function reset(){
   obstacles = [];
   particles = [];
   collectibles = [];
+  sparkles = [];
   shootingStars = [];
-  comboGlow = 0;
-  shake = 0;
   player.y = groundY - player.h;
   player.vy = 0;
   player.grounded = true;
   couponWin.style.display = 'none';
-  startOverlay.style.display = 'none';
-  gameOverOverlay.style.display = 'none';
-  loadingOverlay.style.display = 'none';
+  overlay.style.display = 'none';
   makeStars();
   makeFarObjects();
-  makeDust();
 }
-function setPlayerName(){
-  playerName = (playerNameInput.value || 'Cliente').trim().slice(0,16) || 'Cliente';
-  localStorage.setItem(playerKey, playerName);
-  playerNameHud.textContent = playerName;
-}
+
 function startGame(){
-  setPlayerName();
-  ensureAudio();
-  reset();
-  playSound('jump');
-  requestAnimationFrame(loop);
+  try{
+    setPlayerName();
+    ensureAudio();
+    reset();
+    playSound("jump");
+    requestAnimationFrame(loop);
+  }catch(err){
+    console.error('Erro ao iniciar jogo:', err);
+    alert('O jogo teve um erro ao iniciar. Atualize a página e tente novamente.');
+  }
 }
-function showStart(){
-  running = false;
-  gameOverOverlay.style.display = 'none';
-  loadingOverlay.style.display = 'none';
-  startOverlay.style.display = 'grid';
-  renderRanking(rankingStart);
-  initialPaint();
-}
+
 function jump(){
   if(!running){ startGame(); return; }
   if(player.grounded){
     player.vy = player.jump;
     player.grounded = false;
-    burst(player.x + 34, player.y + player.h - 6, 'rgba(144,255,98,ALPHA)', 18, 3.4);
+    burst(player.x + 34, player.y + player.h - 6, '#90ff62', 16, 3.2);
     playSound('jump');
   }
 }
@@ -453,32 +529,114 @@ window.addEventListener('keydown', e => {
 });
 canvas.addEventListener('mousedown', jump);
 canvas.addEventListener('touchstart', e => { e.preventDefault(); jump(); }, {passive:false});
-playerNameInput.addEventListener('keydown', e => {
-  if(e.key === 'Enter') startGame();
-});
+playerNameInput.addEventListener('keydown', e => { if(e.key === 'Enter') startGame(); });
 
 function burst(x,y,color,count=10,power=2.5){
   for(let i=0;i<count;i++){
-    particles.push({x,y,vx:rand(-power,power),vy:rand(-power-1,1),life:rand(20,42),color,size:rand(2,5)});
+    particles.push({
+      x, y,
+      vx: rand(-power,power),
+      vy: rand(-power-1,1),
+      life: rand(20,38),
+      color,
+      size: rand(2,5)
+    });
   }
 }
+
 function spawnObstacle(){
   const type = choose([
-    {kind:'robot', sprite:'robot', w:70, h:78, yOff:0, points: 20},
-    {kind:'alien', sprite:'alien', w:72, h:78, yOff:0, points: 20},
-    {kind:'beast', sprite:'beast', w:82, h:70, yOff:8, points: 25},
-    {kind:'eye', sprite:'eye', w:74, h:56, yOff:20, points: 30}
+    {kind:'robot', sprite:'robot', w:70, h:78, yOff:0},
+    {kind:'alien', sprite:'alien', w:72, h:78, yOff:0},
+    {kind:'beast', sprite:'beast', w:82, h:70, yOff:8},
+    {kind:'eye', sprite:'eye', w:74, h:56, yOff:20}
   ]);
-  obstacles.push({x: canvas.width + 30, y: groundY - type.h + type.yOff, passed:false, ...type, glow: rand(.8,1.2)});
+  obstacles.push({x: canvas.width + 30, y: groundY - type.h + type.yOff, ...type, glow: rand(.8,1.2)});
 }
+
 function spawnCollectible(){
-  collectibles.push({x: canvas.width + 20, y: rand(168, 285), w: 42, h: 42, sprite:'orb', taken:false, bob: rand(0,Math.PI*2)});
+  collectibles.push({
+    x: canvas.width + 20,
+    y: rand(360, 540),
+    w: 42,
+    h: 42,
+    sprite:'orb',
+    taken:false,
+    bob: rand(0,Math.PI*2)
+  });
 }
+
 function maybeShootingStar(){
-  if(Math.random() < 0.007){
-    shootingStars.push({x: rand(canvas.width*.45, canvas.width), y: rand(10,160), len: rand(70,140), speed: rand(8,15), life: rand(18,30)});
+  if(Math.random() < 0.006){
+    shootingStars.push({x: rand(canvas.width*.45, canvas.width), y: rand(10,160), len: rand(70,130), speed: rand(8,14), life: rand(18,28)});
   }
 }
+
+function drawRoundedRect(x,y,w,h,r, fill=true, stroke=false){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.arcTo(x+w,y,x+w,y+h,r);
+  ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r);
+  ctx.arcTo(x,y,x+w,y,r);
+  ctx.closePath();
+  if(fill) ctx.fill();
+  if(stroke) ctx.stroke();
+}
+
+
+const cosmicAssetSources = {
+  nebula1: 'assets/neon_cosmic_nebula.webp',
+  nebula2: 'assets/swirling_cosmic_nebula.webp',
+  galaxy1: 'assets/cosmic_spiral_galaxy.webp',
+  planet1: 'assets/alien_planet.webp',
+  planet2: 'assets/alien_planet_rings.webp',
+  stars1: 'assets/starburst_sparkle.webp',
+  stars2: 'assets/stardust_cloud.webp'
+};
+const cosmicAssets = {};
+Object.entries(cosmicAssetSources).forEach(([key,src]) => {
+  const img = new Image();
+  img.src = src;
+  cosmicAssets[key] = img;
+});
+
+function drawCosmicImage(key, x, y, w, h, alpha = 1, rotate = 0){
+  const img = cosmicAssets[key];
+  if(!img || !img.complete) return false;
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.translate(x, y);
+  ctx.rotate(rotate);
+  ctx.drawImage(img, -w/2, -h/2, w, h);
+  ctx.restore();
+  return true;
+}
+
+function drawBackdropLayers(){
+  ctx.save();
+  ctx.globalCompositeOperation = 'screen';
+  drawCosmicImage('nebula1', canvas.width*0.25 + Math.sin(frame*0.003)*18, 170 + Math.sin(frame*0.004)*8, 430, 430, 0.34, -0.15);
+  drawCosmicImage('nebula2', canvas.width*0.75 + Math.cos(frame*0.0025)*20, 205 + Math.cos(frame*0.0035)*10, 390, 390, 0.30, 0.18);
+  drawCosmicImage('stars2', canvas.width*0.52, 205 + Math.sin(frame*0.003)*6, 640, 640, 0.20, 0.05);
+  ctx.restore();
+}
+
+function drawCosmicObject(obj){
+  const rotation = (obj.rotate || 0) + frame * (obj.rotSpeed || 0);
+  const ok = drawCosmicImage(obj.assetKey, obj.x, obj.y, obj.w, obj.h, obj.alpha, rotation);
+  if(ok) return;
+  const grad = ctx.createRadialGradient(obj.x, obj.y, 0, obj.x, obj.y, Math.max(obj.w, obj.h) * 0.45);
+  grad.addColorStop(0, 'rgba(255,255,255,0.30)');
+  grad.addColorStop(0.28, 'rgba(110,220,255,0.18)');
+  grad.addColorStop(0.6, 'rgba(168,85,247,0.12)');
+  grad.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = grad;
+  ctx.beginPath();
+  ctx.arc(obj.x, obj.y, Math.max(obj.w, obj.h) * 0.45, 0, Math.PI * 2);
+  ctx.fill();
+}
+
 function drawSprite(name, dx, dy, dw, dh, opts = {}){
   const s = sprites[name];
   if(!s || !atlas.complete) return;
@@ -492,101 +650,21 @@ function drawSprite(name, dx, dy, dw, dh, opts = {}){
   ctx.drawImage(atlas, s.sx, s.sy, s.sw, s.sh, -dw/2, -dh/2, dw, dh);
   ctx.restore();
 }
-function drawGalaxy(x,y,size,hue){
-  ctx.save();
-  ctx.translate(x,y);
-  ctx.rotate(frame*0.0015);
-  const grad = ctx.createRadialGradient(0,0,2,0,0,size);
-  grad.addColorStop(0, `hsla(${hue},100%,92%,.85)`);
-  grad.addColorStop(.2, `hsla(${(hue+60)%360},100%,70%,.45)`);
-  grad.addColorStop(.65, `hsla(${(hue+180)%360},100%,58%,.15)`);
-  grad.addColorStop(1, 'rgba(0,0,0,0)');
-  ctx.fillStyle = grad;
-  ctx.beginPath();
-  ctx.ellipse(0,0,size,size*.42,0,0,Math.PI*2);
-  ctx.fill();
-  ctx.strokeStyle = `hsla(${hue},100%,75%,.22)`;
-  ctx.lineWidth = 2;
-  for(let i=0;i<3;i++){
-    ctx.beginPath();
-    ctx.ellipse(0,0,size*(.42+i*.12),size*(.12+i*.05), frame*0.002 + i*.55,0,Math.PI*2);
-    ctx.stroke();
-  }
-  ctx.restore();
-}
-function drawPlanet(obj){
-  const {x,y,size,colorA,colorB} = obj;
-  const grad = ctx.createRadialGradient(x-size*.25, y-size*.35, size*.08, x, y, size);
-  grad.addColorStop(0, 'rgba(255,255,255,.75)');
-  grad.addColorStop(.15, colorA);
-  grad.addColorStop(1, colorB);
-  ctx.fillStyle = grad;
-  ctx.beginPath();
-  ctx.arc(x,y,size,0,Math.PI*2);
-  ctx.fill();
-  ctx.fillStyle = 'rgba(255,255,255,.08)';
-  ctx.beginPath();ctx.arc(x-size*.22,y-size*.05,size*.15,0,Math.PI*2);ctx.fill();
-  ctx.beginPath();ctx.arc(x+size*.2,y+size*.18,size*.1,0,Math.PI*2);ctx.fill();
-}
-function drawRingPlanet(obj){
-  drawPlanet(obj);
-  ctx.save();
-  ctx.translate(obj.x,obj.y);
-  ctx.rotate(-.35);
-  ctx.strokeStyle = 'rgba(255,255,255,.42)';
-  ctx.lineWidth = obj.size*.11;
-  ctx.beginPath();
-  ctx.ellipse(0,0,obj.size*1.5,obj.size*.46,0,0,Math.PI*2);
-  ctx.stroke();
-  ctx.strokeStyle = 'rgba(168,85,247,.25)';
-  ctx.lineWidth = obj.size*.18;
-  ctx.beginPath();
-  ctx.ellipse(0,0,obj.size*1.62,obj.size*.52,0,0,Math.PI*2);
-  ctx.stroke();
-  ctx.restore();
-}
-function drawNebula(obj){
-  const grad = ctx.createRadialGradient(obj.x, obj.y, 0, obj.x, obj.y, obj.size);
-  grad.addColorStop(0, `hsla(${obj.hue},100%,70%,${obj.alpha})`);
-  grad.addColorStop(.45, `hsla(${(obj.hue+65)%360},100%,60%,${obj.alpha*.7})`);
-  grad.addColorStop(1, 'rgba(0,0,0,0)');
-  ctx.fillStyle = grad;
-  ctx.beginPath();
-  ctx.arc(obj.x,obj.y,obj.size,0,Math.PI*2);
-  ctx.fill();
-}
-function drawPortalGhost(obj){
-  ctx.save();
-  ctx.translate(obj.x, obj.y);
-  ctx.rotate(frame*0.008);
-  ctx.globalAlpha = obj.alpha;
-  for(let i=5;i>0;i--){
-    ctx.beginPath();
-    ctx.ellipse(0,0,obj.size*.33*i,obj.size*.18*i,0,0,Math.PI*2);
-    ctx.strokeStyle = i%2 ? 'rgba(132,255,58,.7)' : 'rgba(168,85,247,.6)';
-    ctx.lineWidth = 4;
-    ctx.stroke();
-  }
-  ctx.restore();
-}
+
 function drawBackground(){
-  if(shake > 0){
-    ctx.save();
-    ctx.translate(rand(-shake,shake), rand(-shake,shake));
-    shake *= .88;
-  }
   const sky = ctx.createLinearGradient(0,0,0,canvas.height);
   sky.addColorStop(0,'#02040b');
   sky.addColorStop(.38,'#081428');
   sky.addColorStop(.72,'#160724');
   sky.addColorStop(1,'#1b2330');
   ctx.fillStyle = sky;
-  ctx.fillRect(-20,-20,canvas.width+40,canvas.height+40);
+  ctx.fillRect(0,0,canvas.width,canvas.height);
 
+  // moving distant atmosphere
   const aurora = ctx.createLinearGradient(0,0,canvas.width,0);
   aurora.addColorStop(0,'rgba(0,0,0,0)');
   aurora.addColorStop(.25,'rgba(49,255,115,.05)');
-  aurora.addColorStop(.5,'rgba(168,85,247,.09)');
+  aurora.addColorStop(.5,'rgba(168,85,247,.08)');
   aurora.addColorStop(.75,'rgba(96,165,250,.05)');
   aurora.addColorStop(1,'rgba(0,0,0,0)');
   ctx.fillStyle = aurora;
@@ -604,14 +682,14 @@ function drawBackground(){
     ctx.fill();
   }
 
+  drawBackdropLayers();
+
   farObjects.forEach(obj => {
-    if(obj.kind === 'planet') drawPlanet(obj);
-    else if(obj.kind === 'ringPlanet') drawRingPlanet(obj);
-    else if(obj.kind === 'galaxy') drawGalaxy(obj.x,obj.y,obj.size,obj.hue);
-    else if(obj.kind === 'portalGhost') drawPortalGhost(obj);
-    else drawNebula(obj);
+    drawCosmicObject(obj);
   });
-  drawSprite('portal', canvas.width-230, 40 + Math.sin(frame*0.01)*8, 155, 155, {alpha:.58, rotate: Math.sin(frame*0.006)*0.08});
+
+  // distant decorative portal from atlas
+  drawSprite('portal', canvas.width-185, 70 + Math.sin(frame*0.01)*8, 135, 135, {alpha:.6, rotate: Math.sin(frame*0.006)*0.08});
 
   stars.forEach(st => {
     const tw = st.a + Math.sin(frame*0.03 + st.x)*0.18;
@@ -623,11 +701,14 @@ function drawBackground(){
       ctx.strokeStyle = `rgba(144,255,98,${Math.max(.1, tw*.7)})`;
       ctx.lineWidth = 1;
       ctx.beginPath();
-      ctx.moveTo(st.x-4, st.y); ctx.lineTo(st.x+4, st.y);
-      ctx.moveTo(st.x, st.y-4); ctx.lineTo(st.x, st.y+4);
+      ctx.moveTo(st.x-4, st.y);
+      ctx.lineTo(st.x+4, st.y);
+      ctx.moveTo(st.x, st.y-4);
+      ctx.lineTo(st.x, st.y+4);
       ctx.stroke();
     }
   });
+
   shootingStars.forEach(s => {
     const grad = ctx.createLinearGradient(s.x, s.y, s.x-s.len, s.y+s.len*.25);
     grad.addColorStop(0,'rgba(255,255,255,.95)');
@@ -641,11 +722,12 @@ function drawBackground(){
     ctx.stroke();
   });
 
+  // moon horizon layers
   ctx.fillStyle = '#7a869a';
   ctx.beginPath();
-  ctx.moveTo(0,300);
+  ctx.moveTo(0,groundY-110);
   for(let x=0;x<=canvas.width;x+=28){
-    const y = 305 + Math.sin((x*0.016)+(frame*0.01))*8 + Math.sin((x*0.004)+1.1)*11;
+    const y = (groundY-105) + Math.sin((x*0.016)+(frame*0.01))*8 + Math.sin((x*0.004)+1.1)*11;
     ctx.lineTo(x,y);
   }
   ctx.lineTo(canvas.width,canvas.height);
@@ -655,9 +737,9 @@ function drawBackground(){
 
   ctx.fillStyle = '#a4acba';
   ctx.beginPath();
-  ctx.moveTo(0,330);
+  ctx.moveTo(0,groundY-55);
   for(let x=0;x<=canvas.width;x+=22){
-    const y = 334 + Math.sin((x*0.022)+(frame*0.022))*6 + Math.sin((x*0.006)+2.2)*7;
+    const y = (groundY-52) + Math.sin((x*0.022)+(frame*0.022))*6 + Math.sin((x*0.006)+2.2)*7;
     ctx.lineTo(x,y);
   }
   ctx.lineTo(canvas.width,canvas.height);
@@ -665,42 +747,69 @@ function drawBackground(){
   ctx.closePath();
   ctx.fill();
 
-  ctx.fillStyle = '#cbd5e1';
-  ctx.fillRect(0,groundY,canvas.width,canvas.height-groundY);
-  ctx.fillStyle = '#b6c0cf';
-  for(let x = -((frame*speed)%85); x < canvas.width + 85; x += 85){ ctx.fillRect(x, groundY+34, 50, 4); }
+  // craters / ground details
   ctx.fillStyle = '#8b95a5';
   for(let x = -((frame*speed*0.4)%180); x<canvas.width+180; x+=180){
-    ctx.beginPath();ctx.ellipse(x+70, groundY+22, 30, 10, 0, 0, Math.PI*2);ctx.fill();
-    ctx.beginPath();ctx.ellipse(x+130, groundY+45, 18, 8, 0, 0, Math.PI*2);ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(x+70, groundY+22, 30, 10, 0, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(x+130, groundY+45, 18, 8, 0, 0, Math.PI*2); ctx.fill();
   }
-  moonDust.forEach(d=>{
-    ctx.fillStyle = `rgba(40,47,63,${d.a})`;
-    ctx.beginPath();ctx.arc(d.x,d.y,d.s,0,Math.PI*2);ctx.fill();
-  });
-  ctx.strokeStyle = 'rgba(132,255,58,.78)';
+
+  // glowing track line
+  ctx.strokeStyle = 'rgba(132,255,58,.75)';
   ctx.lineWidth = 2.5;
-  ctx.beginPath();ctx.moveTo(0,groundY);ctx.lineTo(canvas.width,groundY);ctx.stroke();
-  if(shake > 0.01) ctx.restore();
+  ctx.beginPath();
+  ctx.moveTo(0,groundY);
+  ctx.lineTo(canvas.width,groundY);
+  ctx.stroke();
+
+  ctx.fillStyle = '#cbd5e1';
+  ctx.fillRect(0,groundY,canvas.width,canvas.height-groundY);
+
+  // faixa confortável para o dedo no celular: fica abaixo da ação principal
+  const touchZoneY = canvas.height - 185;
+  ctx.fillStyle = 'rgba(2,6,23,.13)';
+  ctx.fillRect(0, touchZoneY, canvas.width, 185);
+  ctx.strokeStyle = 'rgba(132,255,58,.16)';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(0, touchZoneY);
+  ctx.lineTo(canvas.width, touchZoneY);
+  ctx.stroke();
+
+  ctx.fillStyle = '#b6c0cf';
+  for(let x = -((frame*speed)%85); x < canvas.width + 85; x += 85){
+    ctx.fillRect(x, groundY+34, 50, 4);
+  }
 }
+
 function drawPlayer(){
   const bob = Math.sin(frame*0.16) * (player.grounded ? 1.5 : 0);
-  const rot = clamp(player.vy * 0.018, -0.28, 0.28);
+  const rot = Math.max(-0.28, Math.min(0.28, player.vy * 0.018));
   ctx.save();
   ctx.shadowColor = 'rgba(49,255,115,.45)';
-  ctx.shadowBlur = 18 + comboGlow;
+  ctx.shadowBlur = 18;
   drawSprite('player', player.x, player.y + bob, player.w, player.h, {rotate: rot});
   ctx.restore();
+
+  // subtle portal aura
   ctx.save();
   ctx.translate(player.x + player.w/2, player.y + player.h/2 + bob);
   ctx.rotate(frame*0.03);
-  ctx.strokeStyle = `rgba(132,255,58,${0.28 + comboGlow*.01})`;
+  ctx.strokeStyle = 'rgba(132,255,58,.28)';
   ctx.lineWidth = 3;
-  ctx.beginPath();ctx.ellipse(0,0,44 + comboGlow*.25,24 + comboGlow*.15,0,0,Math.PI*2);ctx.stroke();
+  ctx.beginPath();
+  ctx.ellipse(0,0,44,24,0,0,Math.PI*2);
+  ctx.stroke();
   ctx.restore();
+
   ctx.fillStyle = 'rgba(0,0,0,.18)';
-  ctx.beginPath();ctx.ellipse(player.x+player.w*.5, groundY+6, 28, 7,0,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();
+  ctx.ellipse(player.x+player.w*.5, groundY+6, 28, 7,0,0,Math.PI*2);
+  ctx.fill();
 }
+
 function drawObstacle(o){
   ctx.save();
   ctx.shadowColor = 'rgba(168,85,247,.42)';
@@ -708,6 +817,7 @@ function drawObstacle(o){
   drawSprite(o.sprite, o.x, o.y, o.w, o.h, {flipX: o.kind === 'alien' && Math.sin(frame*0.02)>0});
   ctx.restore();
 }
+
 function drawCollectible(c){
   c.bob += 0.08;
   const y = c.y + Math.sin(c.bob)*5;
@@ -718,8 +828,11 @@ function drawCollectible(c){
   ctx.restore();
   ctx.strokeStyle = 'rgba(250,204,21,.3)';
   ctx.lineWidth = 2;
-  ctx.beginPath();ctx.arc(c.x+c.w/2, y+c.h/2, 24 + Math.sin(c.bob)*2, 0, Math.PI*2);ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(c.x+c.w/2, y+c.h/2, 24 + Math.sin(c.bob)*2, 0, Math.PI*2);
+  ctx.stroke();
 }
+
 function drawParticles(){
   for(let i=particles.length-1;i>=0;i--){
     const p = particles[i];
@@ -727,53 +840,55 @@ function drawParticles(){
     p.y += p.vy;
     p.vy += .12;
     p.life--;
-    const alpha = Math.max(0, p.life/42);
+    const alpha = Math.max(0, p.life/38);
     ctx.fillStyle = p.color.replace('ALPHA', alpha.toFixed(3));
-    ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fill();
     if(p.life<=0) particles.splice(i,1);
   }
 }
-function drawHudHint(){
-  ctx.fillStyle = 'rgba(255,255,255,.72)';
-  ctx.font = '14px Segoe UI';
-  ctx.fillText('Espaço / ↑ / Clique / Toque para pular', 24, 405);
-  if(running){
-    ctx.fillStyle = 'rgba(49,255,115,.14)';
-    ctx.fillRect(0,0,canvas.width,4);
-    ctx.fillStyle = 'rgba(49,255,115,.85)';
-    ctx.fillRect(0,0,Math.min(canvas.width, (score/500)*canvas.width),4);
-  }
-}
+
 function collide(a,b){
   return a.x + 12 < b.x + b.w - 10 && a.x + a.w - 12 > b.x + 8 && a.y + 10 < b.y + b.h - 8 && a.y + a.h - 8 > b.y + 10;
 }
+
 function endGame(){
   running = false;
   gameOver = true;
   playSound('hit');
-  best = Math.max(best, Math.floor(score));
+  const currentScore = Math.floor(score);
+  const previousBest = Number(localStorage.getItem(bestKey) || 0);
+  const isNewBest = currentScore > previousBest;
+  best = Math.max(previousBest, currentScore);
   localStorage.setItem(bestKey, best);
   bestEl.textContent = best;
-  saveRanking(playerName, score);
-  document.getElementById('gameOverTitle').textContent = '💥 Você foi pego!';
-  document.getElementById('gameOverText').innerHTML = `<b>${escapeHtml(playerName)}</b>, você fez <b>${Math.floor(score)}</b> pontos na corrida lunar.`;
+  saveRanking(playerName, currentScore);
+  overlay.style.display = 'grid';
+  panelTitle.textContent = isNewBest ? '🏆 Novo recorde!' : '💥 Você foi pego!';
+  panelText.innerHTML = isNewBest
+    ? `<b>${escapeHtml(playerName)}</b>, você fez <b>${currentScore}</b> pontos e bateu o seu recorde!`
+    : `<b>${escapeHtml(playerName)}</b>, você fez <b>${currentScore}</b> pontos na corrida lunar.`;
+  loadingBar.style.display = 'none';
+  startContent.style.display = 'none';
+  gameOverContent.style.display = 'block';
   renderRanking(rankingGameOver);
-  gameOverOverlay.style.display = 'grid';
 }
+
 function unlockCoupon(){
   coupons++;
   localStorage.setItem(couponsKey, coupons);
   couponsEl.textContent = coupons;
   couponWin.style.display = 'block';
-  comboGlow = 20;
   playSound('coupon');
-  burst(player.x + 42, player.y, 'rgba(250,204,21,ALPHA)', 34, 4.6);
+  burst(player.x + 42, player.y, 'rgba(250,204,21,ALPHA)', 28, 4.2);
 }
+
 function update(){
   frame++;
   score += .36 + speed*0.018;
-  speed = Math.min(13.8, speed + 0.0024);
-  comboGlow = Math.max(0, comboGlow - .22);
+  speed = Math.min(13.5, speed + 0.0024);
+
   maybeShootingStar();
 
   player.vy += player.gravity;
@@ -783,54 +898,67 @@ function update(){
     player.vy = 0;
     player.grounded = true;
   }
+
+  // parallax update
   stars.forEach(st => {
     st.x -= st.s * 0.5 + speed * 0.04;
     if(st.x < -6){ st.x = canvas.width + rand(0,50); st.y = rand(0,groundY-90); }
   });
   farObjects.forEach(obj => {
     obj.x -= obj.speed + speed*0.02;
-    if(obj.x < -280) Object.assign(obj, newFarObject(canvas.width + rand(80,260)));
-  });
-  shootingStars = shootingStars.filter(s => { s.x -= s.speed; s.y += s.speed*0.25; s.life--; return s.life > 0; });
-  moonDust.forEach(d => { d.x -= speed*.18; if(d.x < -10){d.x = canvas.width+10; d.y=rand(groundY+8,canvas.height-10);} });
-
-  if(frame % Math.max(38, Math.floor(96 - speed*4.2)) === 0) spawnObstacle();
-  if(frame % 260 === 0) spawnCollectible();
-  obstacles.forEach(o => {
-    o.x -= speed;
-    if(!o.passed && o.x + o.w < player.x){
-      o.passed = true;
-      score += o.points;
-      burst(player.x+player.w, player.y+15, 'rgba(49,255,115,ALPHA)', 4, 1.5);
+    if(obj.x < -260){
+      Object.assign(obj, newFarObject(canvas.width + rand(80,260)));
     }
   });
+  shootingStars = shootingStars.filter(s => {
+    s.x -= s.speed;
+    s.y += s.speed*0.25;
+    s.life--;
+    return s.life > 0;
+  });
+
+  if(frame % Math.max(40, Math.floor(96 - speed*4.2)) === 0) spawnObstacle();
+  if(frame % 300 === 0) spawnCollectible();
+
+  obstacles.forEach(o => o.x -= speed);
   obstacles = obstacles.filter(o => o.x + o.w > -40);
+
   collectibles.forEach(c => c.x -= speed*0.98);
   collectibles = collectibles.filter(c => c.x + c.w > -40 && !c.taken);
 
   for(const o of obstacles){
     if(collide(player, o)){
-      burst(player.x+42, player.y+45, 'rgba(239,68,68,ALPHA)', 30, 4.5);
-      shake = 8;
+      burst(player.x+42, player.y+45, 'rgba(239,68,68,ALPHA)', 28, 4.2);
       endGame();
       return;
     }
   }
+
   for(const c of collectibles){
     if(collide(player, c)){
       c.taken = true;
-      score += 75;
-      comboGlow = Math.min(25, comboGlow + 9);
+      score += 60;
       playSound('collect');
-      burst(c.x+18, c.y+18, 'rgba(250,204,21,ALPHA)', 20, 3.3);
+      burst(c.x+18, c.y+18, 'rgba(250,204,21,ALPHA)', 18, 3.2);
     }
   }
+
   if(score >= 500 && !localStorage.getItem(couponFlagKey)){
     localStorage.setItem(couponFlagKey, '1');
     unlockCoupon();
   }
+
   scoreEl.textContent = Math.floor(score);
 }
+
+function drawHudHint(){
+  ctx.fillStyle = 'rgba(255,255,255,.78)';
+  ctx.font = 'bold 15px Segoe UI';
+  ctx.textAlign = 'center';
+  ctx.fillText('TOQUE AQUI EMBAIXO PARA PULAR', canvas.width/2, canvas.height - 52);
+  ctx.textAlign = 'left';
+}
+
 function draw(){
   drawBackground();
   collectibles.forEach(drawCollectible);
@@ -839,42 +967,23 @@ function draw(){
   drawParticles();
   drawHudHint();
 }
+
 function loop(){
   if(!running) return;
   update();
   draw();
   requestAnimationFrame(loop);
 }
+
+makeStars();
+makeFarObjects();
 function initialPaint(){
   drawBackground();
   drawPlayer();
   drawHudHint();
 }
-function fakeLoading(){
-  let progress = 0;
-  const steps = ['Preparando cenário dimensional...', 'Carregando personagens...', 'Abrindo portal lunar...', 'Sincronizando ranking local...', 'Tudo pronto!'];
-  const t = setInterval(()=>{
-    progress += rand(8,18);
-    if(progress >= 100) progress = 100;
-    loadingFill.style.width = progress + '%';
-    loadingText.textContent = steps[Math.min(steps.length-1, Math.floor(progress/25))];
-    if(progress >= 100){
-      clearInterval(t);
-      setTimeout(()=>{
-        loadingOverlay.style.display = 'none';
-        startOverlay.style.display = 'grid';
-        renderRanking(rankingStart);
-        initialPaint();
-      }, 350);
-    }
-  }, 170);
-}
-makeStars();
-makeFarObjects();
-makeDust();
+if(atlas.complete){ initialPaint(); fakeLoading(); }
 atlas.onload = () => { initialPaint(); fakeLoading(); };
-atlas.onerror = () => { fakeLoading(); };
-setTimeout(()=>{ if(loadingOverlay.style.display !== 'none') fakeLoading(); }, 900);
 </script>
 </body>
 </html>

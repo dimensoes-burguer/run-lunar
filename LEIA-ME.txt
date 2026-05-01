@@ -1,0 +1,2 @@
+Abra o arquivo index.html mantendo a pasta assets junto dele.
+Versão LEVE: mostra só o maior recorde e a última jogada; usa a logo oficial da Dimensões Burguer.
